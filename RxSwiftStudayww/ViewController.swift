@@ -23,15 +23,18 @@ class ViewController: UIViewController {
         
         data.debug()
             .bind(to: tableView.rx.items){ (tableView, row, element) in
-            let cell = tableView.dequeueReusableCell(withIdentifier: "Cell")!
+            let cell = tableView.dequeueReusableCell(withIdentifier: "uitableview")!
             cell.textLabel?.text = "\(row)：\(element)"
             return cell
         }
     
-        
         // Do any additional setup after loading the view, typically from a nib.
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.present(TextViewController(), animated: true, completion: nil)
 
+    }
 }
 

@@ -14,6 +14,7 @@
 		39E92849216CB2AC00B8ACC1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 39E92847216CB2AC00B8ACC1 /* LaunchScreen.storyboard */; };
 		39E92854216CB2AC00B8ACC1 /* RxSwiftStudaywwTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39E92853216CB2AC00B8ACC1 /* RxSwiftStudaywwTests.swift */; };
 		39E9285F216CB2AC00B8ACC1 /* RxSwiftStudaywwUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39E9285E216CB2AC00B8ACC1 /* RxSwiftStudaywwUITests.swift */; };
+		39F9C1F1216D9C3000A21627 /* TextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F9C1F0216D9C3000A21627 /* TextViewController.swift */; };
 		578AE46A79E2EC033602809C /* Pods_RxSwiftStudaywwTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2ED291FF7788817BC4B57BD8 /* Pods_RxSwiftStudaywwTests.framework */; };
 		92A210EF1BF30A72072E9C6B /* Pods_RxSwiftStudaywwUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 11B6E475EEC2FBCF688C97A3 /* Pods_RxSwiftStudaywwUITests.framework */; };
 		F22E58993320FCD9A3097BE1 /* Pods_RxSwiftStudayww.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0980347AC2DF7FE18F73B6CD /* Pods_RxSwiftStudayww.framework */; };
@@ -54,6 +55,7 @@
 		39E9285A216CB2AC00B8ACC1 /* RxSwiftStudaywwUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RxSwiftStudaywwUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		39E9285E216CB2AC00B8ACC1 /* RxSwiftStudaywwUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxSwiftStudaywwUITests.swift; sourceTree = "<group>"; };
 		39E92860216CB2AC00B8ACC1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		39F9C1F0216D9C3000A21627 /* TextViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextViewController.swift; sourceTree = "<group>"; };
 		4EE07E7A092E3E240C27E89D /* Pods-RxSwiftStudaywwTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RxSwiftStudaywwTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RxSwiftStudaywwTests/Pods-RxSwiftStudaywwTests.debug.xcconfig"; sourceTree = "<group>"; };
 		50CDE87C72EA4BC7341B124F /* Pods-RxSwiftStudaywwTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RxSwiftStudaywwTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-RxSwiftStudaywwTests/Pods-RxSwiftStudaywwTests.release.xcconfig"; sourceTree = "<group>"; };
 		7FE652D7B74900D22E511F3D /* Pods-RxSwiftStudaywwUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RxSwiftStudaywwUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-RxSwiftStudaywwUITests/Pods-RxSwiftStudaywwUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -126,6 +128,7 @@
 			children = (
 				39E9283E216CB2A900B8ACC1 /* AppDelegate.swift */,
 				39E92840216CB2A900B8ACC1 /* ViewController.swift */,
+				39F9C1F0216D9C3000A21627 /* TextViewController.swift */,
 				39E92842216CB2A900B8ACC1 /* Main.storyboard */,
 				39E92845216CB2AC00B8ACC1 /* Assets.xcassets */,
 				39E92847216CB2AC00B8ACC1 /* LaunchScreen.storyboard */,
@@ -349,14 +352,18 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-RxSwiftStudayww/Pods-RxSwiftStudayww-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Differentiator/Differentiator.framework",
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
+				"${BUILT_PRODUCTS_DIR}/RxDataSources/RxDataSources.framework",
 				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 			);
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Differentiator.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxDataSources.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -395,6 +402,7 @@
 			files = (
 				39E92841216CB2A900B8ACC1 /* ViewController.swift in Sources */,
 				39E9283F216CB2A900B8ACC1 /* AppDelegate.swift in Sources */,
+				39F9C1F1216D9C3000A21627 /* TextViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

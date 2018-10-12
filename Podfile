@@ -9,7 +9,7 @@ target 'RxSwiftStudayww' do
 
    pod 'RxSwift', '~> 4.3.1'
     pod 'RxCocoa', '~> 4.3.1'
-
+    pod 'RxDataSources', '~> 3.1.0'
   target 'RxSwiftStudaywwTests' do
     inherit! :search_paths
     # Pods for testing
