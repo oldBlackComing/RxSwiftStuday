@@ -1,0 +1,6 @@
+framework module Pods_ImagePickerDemo {
+  umbrella header "Pods-ImagePickerDemo-umbrella.h"
+
+  export *
+  module * { export * }
+}
