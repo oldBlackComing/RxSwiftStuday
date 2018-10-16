@@ -30,7 +30,7 @@ class PhotoCollectionViewCell: UICollectionViewCell {
     
     private lazy var numBtn = { () -> UIButton in
         let button = UIButton()
-        button.layer.cornerRadius = 12
+        button.layer.cornerRadius = 0
         button.layer.masksToBounds = true
         button.setBackgroundImage(UIImage.init(named: "icon_unselect"), for: UIControl.State.normal)
         button.setBackgroundImage(UIImage.init(named: "icon_select"), for: UIControl.State.selected)
@@ -98,9 +98,9 @@ class PhotoCollectionViewCell: UICollectionViewCell {
         
         numBtn.isSelected = vm.selected
         if numBtn.isSelected {
-            numBtn.setTitle("\(vm.index)", for: UIControl.State.normal)
+//            numBtn.setTitle("\(vm.index)", for: UIControl.State.normal)
         } else {
-            numBtn.setTitle("", for: UIControl.State.normal)
+//            numBtn.setTitle("", for: UIControl.State.normal)
         }
     }
     
@@ -113,9 +113,9 @@ class PhotoCollectionViewCell: UICollectionViewCell {
       
         numBtn.isSelected = vm.selected
         if numBtn.isSelected {
-            numBtn.setTitle("\(vm.index)", for: UIControl.State.normal)
+//            numBtn.setTitle("\(vm.index)", for: UIControl.State.normal)
         } else {
-            numBtn.setTitle("", for: UIControl.State.normal)
+//            numBtn.setTitle("", for: UIControl.State.normal)
         }
         
         let size = CGSize.init(width: self.bounds.size.width * 2, height: self.bounds.size.height * 2)

@@ -16,6 +16,10 @@ class PhotoTableViewController: UITableViewController {
     
     var albums = [PhotoModel]()
     
+    
+    /// 回调
+    var callBack: ((_ model: PhotoModel) -> Void)?
+    
     weak var nav: PhotoSelectorViewController?
     
     // 数据源
@@ -36,6 +40,7 @@ class PhotoTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.title = "选择相册"
         nav = self.navigationController as? PhotoSelectorViewController
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -43,9 +48,11 @@ class PhotoTableViewController: UITableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
         loadAlbums(false)
+        configNavigationBar()
         setUpTableVIew()
     }
     
+    /// tableView
     private func setUpTableVIew() {
         tableView.register(PhotoTableViewCell.self, forCellReuseIdentifier: albumTableViewCellItentifier)
         tableView.estimatedRowHeight = PhotoSelectorConfig.AlbumTableViewCellHeight
@@ -56,6 +63,17 @@ class PhotoTableViewController: UITableViewController {
 
     }
     
+    //设置导航
+    private func configNavigationBar(){
+        //添加取消键
+        let cancelButton = UIBarButtonItem.init(image: UIImage.init(named: "Slice 2")!, style: .plain, target: self, action: #selector(self.eventCancel))
+        self.navigationItem.leftBarButtonItem = cancelButton
+    }
+    
+    @objc func eventCancel(){
+        self.navigationController?.popViewController(animated: true)
+//        self.navigationController?.dismiss(animated: true, completion: nil)
+    }
     // MARK: - Table view data source
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -86,11 +104,14 @@ class PhotoTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let model = albums[indexPath.row]
-        let layout = PhotoCollectionViewController.zjxconfigCollectionViewLayout()
-        let controller = PhotoCollectionViewController(collectionViewLayout: layout)
-        controller.fetchResult = model.fetchResult
-        controller.title = model.name
-        self.navigationController?.pushViewController(controller, animated: true)
+//        let layout = PhotoCollectionViewController.zjxconfigCollectionViewLayout()
+//        let controller = PhotoCollectionViewController(collectionViewLayout: layout)
+        
+        callBack?(model)
+        self.navigationController?.popViewController(animated: true)
+//        controller.fetchResult = model.fetchResult
+//        controller.title = model.name
+//        self.navigationController?.pushViewController(controller, animated: true)
     }
     //将数据进行赋值
     func loadAlbums(_ replace: Bool){

@@ -73,7 +73,7 @@ class PhotoPreviewViewController: UIViewController {
         title = "\(currentPage + 1)/\(nav?.assetArr.count ?? 1)"
         
         // 先处理数据
-        resetImageToVM()
+//        resetImageToVM()
         
         // 加载页面
         view.addSubview(collectionView)

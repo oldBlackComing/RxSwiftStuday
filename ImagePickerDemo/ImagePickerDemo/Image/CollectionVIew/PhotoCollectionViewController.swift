@@ -11,7 +11,24 @@ import Photos
 
 private let reuseIdentifier = "Cell"
 
+
+//状态栏高度
+let e_kStatusBarHeight :CGFloat = UIApplication.shared.statusBarFrame.size.height
+
+//状态栏高度 + 44导航
+let e_kNavigationAndStatusBarHeight :CGFloat = (e_kStatusBarHeight + 44.0)
+
+// 安全区 di
+let e_safeAreaE:CGFloat = e_kNavigationAndStatusBarHeight>64 ? 34 : 0
+
+
+
 class PhotoCollectionViewController: UICollectionViewController, AlbumToolbarViewDelegate, PhotoCollectionViewCellDelegate {
+    
+    
+    /// 获取当前相册权限状态
+    var status: PHAuthorizationStatus = .notDetermined
+    
     func cellTaped(at cell: PhotoCollectionViewCell) {
         if let indexPath = collectionView?.indexPath(for: cell) {
             if indexPath.row == 0, PhotoSelectorConfig.needCamrea {
@@ -38,9 +55,14 @@ class PhotoCollectionViewController: UICollectionViewController, AlbumToolbarVie
         nav?.imagePickerFinished()
     }
     
-    func previewBtnTap() {
+    
+    func previewBtnTap(asset: PHAsset?) {
         // 去预览
         let preview = PhotoPreviewViewController()
+        if let `asset` = asset {
+            
+        preview.dataSource.append(PhotoPreviewCellVM.getInstance(with: asset))
+        }
         self.navigationController?.show(preview, sender: nil)
         
     }
@@ -48,7 +70,7 @@ class PhotoCollectionViewController: UICollectionViewController, AlbumToolbarVie
     
     
     //最下方工具条高度
-    private let toolbarHeight: CGFloat = 49.0
+    private let toolbarHeight: CGFloat = 49.0 + e_safeAreaE
     
     
     // 选中的图片的VM
@@ -99,6 +121,9 @@ class PhotoCollectionViewController: UICollectionViewController, AlbumToolbarVie
             bottom: PhotoSelectorConfig.MinimumInteritemSpacing,
             right: PhotoSelectorConfig.MinimumInteritemSpacing
         )
+        
+        configNavigationBar()
+        
         self.collectionView?.backgroundColor = UIColor.white
         
         // Do any additional setup after loading the view.
@@ -195,10 +220,11 @@ class PhotoCollectionViewController: UICollectionViewController, AlbumToolbarVie
                 alert.addAction(sureAction)
                 self.present(alert, animated: true, completion: nil)
             } else {
-                previewBtnTap()
+                previewBtnTap(asset: vm.asset)
             }
         } else {
-            previewBtnTap()
+            let vm = dataSource[indexPath.row]
+            previewBtnTap(asset: vm.asset)
             // 去预览
             //            let preview = PhotoPreviewViewController()
             //            preview.currentPage = indexPath.row - 1
@@ -225,6 +251,49 @@ class PhotoCollectionViewController: UICollectionViewController, AlbumToolbarVie
             make.left.bottom.right.equalToSuperview()
         })
     }
+    
+    //设置导航
+    private func configNavigationBar(){
+        //添加取消键
+        let cancelButton = UIBarButtonItem.init(image: UIImage.init(named: "icon_close"), style: .plain, target: self, action: #selector(self.eventCancel))
+        self.navigationItem.leftBarButtonItem = cancelButton
+        
+        
+        //添加取消键
+        
+        let back = UIBarButtonItem.init(title: "更换相册", style: .plain, target: self, action: #selector(self.eventBack))
+
+//        let back = UIBarButtonItem.init(image: UIImage.init(named: "Slice 2")!, style: .plain, target: self, action: #selector(self.eventBack))
+        self.navigationItem.rightBarButtonItem = back
+
+    }
+    
+    @objc func eventCancel(){
+        self.navigationController?.dismiss(animated: true, completion: nil)
+    }
+    
+    @objc func eventBack(){
+        
+        if self.status != .authorized {
+            nav?.getPremiss()
+            return
+        }
+                let photoTVC: PhotoTableViewController = PhotoTableViewController(style: .plain)
+        photoTVC.callBack = {[weak self](model) in
+            
+            guard let `self` = self else {
+                return
+            }
+            self.dataSource.removeAll()
+            self.fetchResult = model.fetchResult
+            self.title = model.name
+            self.resetPHFetchResultToCellVM()
+            self.collectionView.reloadData()
+        }
+        self.navigationController?.pushViewController(photoTVC, animated: true)
+    }
+    
+    
     public class func zjxconfigCollectionViewLayout() -> UICollectionViewFlowLayout {
         let collectionLayout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         let width = UIScreen.main.bounds.width - PhotoSelectorConfig.MinimumInteritemSpacing * 2

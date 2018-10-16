@@ -6,15 +6,22 @@
 //
 
 import UIKit
+import Photos
 
 protocol AlbumToolbarViewDelegate: class {
     func finishBtnTap()
-    func previewBtnTap()
+    func previewBtnTap(asset: PHAsset?)
 }
 
 class AlbumToolbarView: UIView {
 
     weak var delegate: AlbumToolbarViewDelegate?
+    
+    var lineView: UIView = {
+        let v: UIView = UIView()
+        v.backgroundColor = UIColor.init(red: 230, green: 230, blue: 230, alpha: 1)
+        return v
+    }()
     
     //照片最大数量
     var imageMaxSelectedNum = 9 {
@@ -26,7 +33,7 @@ class AlbumToolbarView: UIView {
     var selectedNumber = 0 {
         didSet {
             finishBtn.setTitle("完成(\(selectedNumber)/\(imageMaxSelectedNum))", for: UIControl.State.normal)
-            finishBtn.backgroundColor = selectedNumber == 0 ?  UIColor.init(red: 204/255, green: 204/255, blue: 204/255, alpha: 1) : UIColor.init(red: 255/255, green: 99/255, blue: 99/255, alpha: 1) 
+            finishBtn.backgroundColor = selectedNumber == 0 ?  UIColor.init(red: 204/255, green: 204/255, blue: 204/255, alpha: 1) : UIColor.init(red: 23/255, green: 192/255, blue: 157/255, alpha: 1) 
         }
     }
     
@@ -40,10 +47,11 @@ class AlbumToolbarView: UIView {
     
     private lazy var finishBtn = { () -> UIButton in
         let button = UIButton()
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 15)
-        button.backgroundColor = UIColor.init(red: 204/255, green: 204/255, blue: 204/255, alpha: 1)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 14)
+        button.backgroundColor = UIColor.init(red: 23/255, green: 184/255, blue: 147/255, alpha: 1)
         button.setTitleColor( UIColor.white, for: UIControl.State.normal)
         button.setTitle("完成(0/\(imageMaxSelectedNum))", for: UIControl.State.normal)
+        button.layer.cornerRadius = 3
         return button
     }()
     
@@ -61,9 +69,10 @@ class AlbumToolbarView: UIView {
         super.layoutSubviews()
         
         finishBtn.snp.makeConstraints { (make) in
-            make.width.equalTo(125)
-            make.height.equalTo(self)
-            make.top.right.equalTo(0)
+            make.width.equalTo(67)
+            make.height.equalTo(32)
+            make.top.right.equalTo(6)
+            make.right.equalTo(-16)
         }
         
         previewBtn.snp.makeConstraints { (make) in
@@ -72,12 +81,18 @@ class AlbumToolbarView: UIView {
             make.width.equalTo(60)
         }
         
+        lineView.snp.makeConstraints { (make) in
+            make.left.top.right.equalTo(0)
+            make.height.equalTo(0.5)
+        }
+        previewBtn.isHidden = true
     }
     
     private func setupView() {
         backgroundColor = UIColor.white
         addSubview(previewBtn)
         addSubview(finishBtn)
+        addSubview(lineView)
         
         finishBtn.addTarget(self, action: #selector(finishBtnHasTapped), for: UIControl.Event.touchUpInside)
         previewBtn.addTarget(self, action: #selector(previewBtnHasTapped), for: UIControl.Event.touchUpInside)
@@ -89,7 +104,7 @@ class AlbumToolbarView: UIView {
     }
     
     @objc func previewBtnHasTapped() {
-        self.delegate?.previewBtnTap()
+        self.delegate?.previewBtnTap(asset: nil)
     }
     
 }
