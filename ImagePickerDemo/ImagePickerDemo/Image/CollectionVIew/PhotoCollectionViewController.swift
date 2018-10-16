@@ -65,7 +65,7 @@ class PhotoCollectionViewController: UICollectionViewController, AlbumToolbarVie
         preview.dataSource.append(PhotoPreviewCellVM.getInstance(with: asset))
         }
         preview.transitioningDelegate = self.animation
-        
+        self.animation.disDelegate = preview
         self.navigationController?.present(preview, animated: true, completion: nil)
 //        self.navigationController?.show(preview, sender: nil)
         
@@ -80,6 +80,7 @@ class PhotoCollectionViewController: UICollectionViewController, AlbumToolbarVie
         }
         preview.transitioningDelegate = self.animation
         animation.t = indexPath.row
+        self.animation.disDelegate = preview
         self.navigationController?.present(preview, animated: true, completion: nil)
         //        self.navigationController?.show(preview, sender: nil)
         

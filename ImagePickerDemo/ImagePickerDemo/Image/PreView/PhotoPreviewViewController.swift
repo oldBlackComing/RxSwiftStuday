@@ -62,6 +62,10 @@ class PhotoPreviewViewController: UIViewController {
         return collectionView
     }()
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+//        self.dismiss(animated: true, completion: nil)
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -205,7 +209,7 @@ extension PhotoPreviewViewController: DismissProTocol {
         }
         let cell: PhotoPreviewCell = self.collectionView.cellForItem(at: IndexPath.init(row: ta, section: 0)) as! PhotoPreviewCell
         
-        let view = cell.imageView
+        let view = UIImageView.init(image: cell.imageView.image)
         
         return view
 

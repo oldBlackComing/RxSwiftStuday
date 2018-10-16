@@ -87,7 +87,7 @@ class CustomerTranslation:NSObject, UIViewControllerTransitioningDelegate {
 
 extension CustomerTranslation: UIViewControllerAnimatedTransitioning {
     func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
-        return 0.3
+        return 5
     }
     
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
@@ -99,6 +99,11 @@ extension CustomerTranslation: UIViewControllerAnimatedTransitioning {
     }
     
     func animationFromPresent(transitionContext: UIViewControllerContextTransitioning) {
+        let presentView = transitionContext.view(forKey: UITransitionContextViewKey.to)
+        if let p = presentView {
+            transitionContext.containerView.addSubview(p)
+        }
+        
         let view = preDelegate?.protocolStartView(t: t)
         let startPosition = preDelegate?.protocalStartPosition(t: t)
         let endFrame = preDelegate?.protocolEndFrame(t: t)
@@ -112,13 +117,15 @@ extension CustomerTranslation: UIViewControllerAnimatedTransitioning {
 
         view1.frame = startPosition1
         transitionContext.containerView.backgroundColor = UIColor.black.withAlphaComponent(0.3)
-        
+        presentView?.alpha = 0
+
         UIView.animate(withDuration: transitionDuration(using: transitionContext), animations: {
             view1.frame = endFrame1
             transitionContext.containerView.backgroundColor = UIColor.black.withAlphaComponent(1)
         }) { (com) in
             if com {
-//                view1.removeFromSuperview()
+                presentView?.alpha = 1
+                view1.removeFromSuperview()
                 transitionContext.containerView.backgroundColor = .clear
             }
             transitionContext.completeTransition(true)
@@ -127,6 +134,8 @@ extension CustomerTranslation: UIViewControllerAnimatedTransitioning {
     }
 
     func animationFromDisMIss(transitionContext: UIViewControllerContextTransitioning) {
+        let disView = transitionContext.view(forKey: UITransitionContextViewKey.from)
+        disView?.removeFromSuperview()
         let view = disDelegate?.protocolStartView(t: t)
         let startPosition = disDelegate?.protocalStartPosition(t: t)
         let endFrame = preDelegate?.protocalStartPosition(t:t)
@@ -134,7 +143,6 @@ extension CustomerTranslation: UIViewControllerAnimatedTransitioning {
         guard let `view1` = view, let `startPosition1` = startPosition, let `endFrame1` = endFrame else {
             return
         }
-        
         transitionContext.containerView.addSubview(view1)
         view1.frame = startPosition1
         transitionContext.containerView.backgroundColor = UIColor.black
@@ -144,12 +152,20 @@ extension CustomerTranslation: UIViewControllerAnimatedTransitioning {
             transitionContext.containerView.backgroundColor = UIColor.black.withAlphaComponent(0)
         }) { (com) in
             if com {
-//                view1.removeFromSuperview()
-                transitionContext.containerView.backgroundColor = .clear
             }
             transitionContext.completeTransition(com)
         }
     }
     
+//    UIView *dismissView = [transitionContext viewForKey:UITransitionContextFromViewKey];
+//    [dismissView removeFromSuperview];
     
+//    UIImageView *imageView = [self.animationDismissDelegate imageViewForDismissView];
+//    [transitionContext.containerView addSubview:imageView];
+//    NSInteger index = [self.animationDismissDelegate indexForDismissView];
+//    [UIView animateWithDuration:[self transitionDuration:transitionContext] animations:^{
+//    imageView.frame = [self.animationPresentDelegate startRect:index];
+//    } completion:^(BOOL finished) {
+//    [transitionContext completeTransition:YES];
+//    }];
 }
