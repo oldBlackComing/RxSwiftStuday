@@ -56,15 +56,13 @@ class ViewController: UIViewController {
                 print("wwwwwwww")
         })
         
-<<<<<<< HEAD
-        data.debug()
-            .bind(to: tableView.rx.items){ (tableView, row, element) in
-            let cell = tableView.dequeueReusableCell(withIdentifier: "uitableview")!
-            cell.textLabel?.text = "\(row)：\(element)"
-            return cell
-        }
+//        data.debug()
+//            .bind(to: tableView.rx.items){ (tableView, row, element) in
+//            let cell = tableView.dequeueReusableCell(withIdentifier: "uitableview")!
+//            cell.textLabel?.text = "\(row)：\(element)"
+//            return cell
+//        }
     
-=======
         let btn: UIButton = self.btn
         btn.rx.tap.scan(0) { (privalue, _) in
             return privalue + 1
@@ -87,27 +85,27 @@ class ViewController: UIViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        self.present(TextViewController(), animated: true, completion: nil)
+//        self.present(TextViewController(), animated: true, completion: nil)
         self.present(PrivacyAgreementViewController(), animated: true, completion: nil)
     }
 
     }
-}
 
 
 
-struct MusicListViewModel {
-    let data = Observable.just([
-        Music(name: "无条件", singer: "陈奕迅"),
-        Music(name: "你曾是少年", singer: "S.H.E"),
-        Music(name: "从前的我", singer: "陈洁仪"),
-        Music(name: "在木星", singer: "朴树"),
-        ])
-}
 
-struct Music {
-    var name:String?
-    var singer: String?
-    
-    
-}
+//struct MusicListViewModel {
+//    let data = Observable.just([
+//        Music(name: "无条件", singer: "陈奕迅"),
+//        Music(name: "你曾是少年", singer: "S.H.E"),
+//        Music(name: "从前的我", singer: "陈洁仪"),
+//        Music(name: "在木星", singer: "朴树"),
+//        ])
+//}
+
+//struct Music {
+//    var name:String?
+//    var singer: String?
+//    
+//    
+//}
