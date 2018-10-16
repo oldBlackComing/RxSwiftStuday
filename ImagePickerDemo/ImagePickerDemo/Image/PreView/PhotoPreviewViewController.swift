@@ -189,3 +189,58 @@ extension PhotoPreviewViewController: UICollectionViewDelegate, UICollectionView
 //    
 //}
 
+
+extension PhotoPreviewViewController: DismissProTocol {
+    func protocolStartView(t: Int?) -> UIView {
+        guard var ta = t else {
+            return UIView()
+        }
+        
+        if dataSource.count > ta {
+            
+        }else if dataSource.count > 0 {
+            ta = 0
+        }else {
+            return UIView()
+        }
+        let cell: PhotoPreviewCell = self.collectionView.cellForItem(at: IndexPath.init(row: ta, section: 0)) as! PhotoPreviewCell
+        
+        let view = cell.imageView
+        
+        return view
+
+    }
+    
+    func protocalStartPosition(t: Int?) -> CGRect {
+        guard let ta = t else {
+            return CGRect.zero
+        }
+        let width: CGFloat = UIScreen.main.bounds.width
+        
+        var vm: PhotoPreviewCellVM!
+        
+        if dataSource.count > ta {
+            vm = dataSource[ta]
+        }else if dataSource.count > 0 {
+            vm = dataSource[0]
+        }else {
+            return CGRect.init(x: 0, y: 0, width: 0, height: 0)
+        }
+        
+        var mut = 0
+        
+        if let h = vm.asset?.pixelHeight, h > 0 {
+            mut = (vm.asset?.pixelWidth ?? 0) / h
+        }
+        let height: CGFloat = width / CGFloat(mut > 0 ? mut : 1)
+        
+        let y: CGFloat = UIScreen.main.bounds.height / 2 - height/2
+        return CGRect.init(x: 0, y: y, width: width, height: height)
+
+    }
+    
+
+    
+
+    
+}

@@ -25,6 +25,7 @@ let e_safeAreaE:CGFloat = e_kNavigationAndStatusBarHeight>64 ? 34 : 0
 
 class PhotoCollectionViewController: UICollectionViewController, AlbumToolbarViewDelegate, PhotoCollectionViewCellDelegate {
     
+    var animation: CustomerTranslation = CustomerTranslation()
     
     /// 获取当前相册权限状态
     var status: PHAuthorizationStatus = .notDetermined
@@ -63,11 +64,26 @@ class PhotoCollectionViewController: UICollectionViewController, AlbumToolbarVie
             
         preview.dataSource.append(PhotoPreviewCellVM.getInstance(with: asset))
         }
-        self.navigationController?.show(preview, sender: nil)
+        preview.transitioningDelegate = self.animation
+        
+        self.navigationController?.present(preview, animated: true, completion: nil)
+//        self.navigationController?.show(preview, sender: nil)
         
     }
     
-    
+    func previewBtnTap(asset: PHAsset?, indexPath: IndexPath) {
+        // 去预览
+        let preview = PhotoPreviewViewController()
+        if let `asset` = asset {
+            
+            preview.dataSource.append(PhotoPreviewCellVM.getInstance(with: asset))
+        }
+        preview.transitioningDelegate = self.animation
+        animation.t = indexPath.row
+        self.navigationController?.present(preview, animated: true, completion: nil)
+        //        self.navigationController?.show(preview, sender: nil)
+        
+    }
     
     //最下方工具条高度
     private let toolbarHeight: CGFloat = 49.0 + e_safeAreaE
@@ -100,6 +116,9 @@ class PhotoCollectionViewController: UICollectionViewController, AlbumToolbarVie
         nav = self.navigationController as? PhotoSelectorViewController
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
+        
+        
+        animation.preDelegate = self
         
         let originFrame = self.collectionView!.frame
         //重新设置collectionView的大小，留出底部工具条的位置
@@ -224,7 +243,7 @@ class PhotoCollectionViewController: UICollectionViewController, AlbumToolbarVie
             }
         } else {
             let vm = dataSource[indexPath.row]
-            previewBtnTap(asset: vm.asset)
+            previewBtnTap(asset: vm.asset, indexPath: indexPath)
             // 去预览
             //            let preview = PhotoPreviewViewController()
             //            preview.currentPage = indexPath.row - 1
@@ -365,36 +384,7 @@ class PhotoCollectionViewController: UICollectionViewController, AlbumToolbarVie
         }
         
     }
-    // MARK: UICollectionViewDelegate
     
-    /*
-     // Uncomment this method to specify if the specified item should be highlighted during tracking
-     override func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
-     return true
-     }
-     */
-    
-    /*
-     // Uncomment this method to specify if the specified item should be selected
-     override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-     return true
-     }
-     */
-    
-    /*
-     // Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
-     override func collectionView(_ collectionView: UICollectionView, shouldShowMenuForItemAt indexPath: IndexPath) -> Bool {
-     return false
-     }
-     
-     override func collectionView(_ collectionView: UICollectionView, canPerformAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
-     return false
-     }
-     
-     override func collectionView(_ collectionView: UICollectionView, performAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) {
-     
-     }
-     */
     
     func openCamera() {
         let imagePicker =  UIImagePickerController()
@@ -433,5 +423,53 @@ extension PhotoCollectionViewController: UIImagePickerControllerDelegate, UINavi
     public func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         picker.dismiss(animated: true, completion: nil)
     }
+    
+}
+
+
+extension PhotoCollectionViewController: AnimationProTocol {
+    func protocolStartView(t: Int?) -> UIView {
+        guard let ta = t else {
+            return UIView()
+        }
+        let cell: PhotoCollectionViewCell = self.collectionView.cellForItem(at: IndexPath.init(row: ta, section: 0)) as! PhotoCollectionViewCell
+        
+        let view = UIImageView.init(image: cell.photoImageView.image)
+        
+        return view
+    }
+    
+    func protocalStartPosition(t: Int?) -> CGRect {
+        guard let ta = t else {
+            return CGRect.zero
+        }
+        let cell: PhotoCollectionViewCell = self.collectionView.cellForItem(at: IndexPath.init(row: ta, section: 0)) as! PhotoCollectionViewCell
+        
+        let view = cell.photoImageView
+        return view.convert(view.frame, to: UIApplication.shared.keyWindow)
+    }
+    
+    func protocolEndFrame(t: Int?) -> CGRect {
+        guard let ta = t else {
+            return CGRect.zero
+        }
+        let width: CGFloat = UIScreen.main.bounds.width
+        
+        
+        let vm = dataSource[ta]
+        
+        var mut = 0
+        
+        if let h = vm.asset?.pixelHeight, h > 0 {
+            mut = (vm.asset?.pixelWidth ?? 0) / h
+        }
+        let height: CGFloat = width / CGFloat(mut > 0 ? mut : 1)
+        
+        let y: CGFloat = UIScreen.main.bounds.height / 2 - height/2
+        return CGRect.init(x: 0, y: y, width: width, height: height)
+        
+
+    }
+    
     
 }

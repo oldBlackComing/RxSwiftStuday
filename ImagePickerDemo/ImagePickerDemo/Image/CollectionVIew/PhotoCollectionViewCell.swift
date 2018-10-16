@@ -37,7 +37,7 @@ class PhotoCollectionViewCell: UICollectionViewCell {
         return button
     }()
     
-    private lazy var photoImageView = { () -> UIImageView in
+     lazy var photoImageView = { () -> UIImageView in
         let view = UIImageView()
         view.backgroundColor = UIColor.white
         view.contentMode = .scaleAspectFill
