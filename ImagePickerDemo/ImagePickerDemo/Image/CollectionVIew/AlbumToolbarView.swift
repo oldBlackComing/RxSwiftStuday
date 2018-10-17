@@ -71,7 +71,7 @@ class AlbumToolbarView: UIView {
         finishBtn.snp.makeConstraints { (make) in
             make.width.equalTo(67)
             make.height.equalTo(32)
-            make.top.right.equalTo(6)
+            make.top.equalTo(6)
             make.right.equalTo(-16)
         }
         

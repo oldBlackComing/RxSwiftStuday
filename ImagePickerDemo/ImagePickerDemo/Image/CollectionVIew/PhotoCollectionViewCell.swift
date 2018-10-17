@@ -17,6 +17,8 @@ class PhotoCollectionViewCell: UICollectionViewCell {
     
     weak var delegate: PhotoCollectionViewCellDelegate?
     
+    var asset: PHAsset?  //
+
     private var isFirst: Bool = false
     
     let photoImageManager = PHCachingImageManager()
@@ -108,7 +110,8 @@ class PhotoCollectionViewCell: UICollectionViewCell {
         
         numBtn.isHidden = vm.isFirst
         coverView.isHidden = !vm.isCovered
-        
+        asset = vm.asset
+
         self.isFirst = vm.isFirst
       
         numBtn.isSelected = vm.selected

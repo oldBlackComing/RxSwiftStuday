@@ -1,14 +1,16 @@
 //
 //  ShowAnimations.swift
-//  WeddingBazaar
+//  ImagePickerDemo
 //
-//  Created by hbh112 on 2018/5/15.
-//  Copyright © 2018年 中国婚博会. All rights reserved.
+//  Created by huifenqi on 2018/10/17.
+//  Copyright © 2018 huifenqi. All rights reserved.
 //
 
+import Foundation
 import UIKit
 
-fileprivate var str = "wwwwwwwwwwwwwwwwwwwwww"
+fileprivate let str = "sadasdasdasdasd"
+
 class ShowAnimations: NSObject {
     static let share: ShowAnimations = ShowAnimations()
     private var v: UIView?
@@ -19,7 +21,7 @@ class ShowAnimations: NSObject {
     
     typealias aa = (x: CGFloat, y: CGFloat, z: CGFloat)
     private lazy var caAni: CAKeyframeAnimation = {
-         let caK: CAKeyframeAnimation = CAKeyframeAnimation()
+        let caK: CAKeyframeAnimation = CAKeyframeAnimation()
         caK.keyPath = "transform"
         caK.delegate = self
         caK.fillMode = CAMediaTimingFillMode.forwards
@@ -33,8 +35,8 @@ class ShowAnimations: NSObject {
         
         aarr.removeAll()
         if show {
-//            view?.layer.transform = CATransform3DMakeScale(0.4, 0.4, 0.4)
-
+            //            view?.layer.transform = CATransform3DMakeScale(0.4, 0.4, 0.4)
+            
             showAni(View: view)
         }else{
             hidAni()
@@ -55,7 +57,7 @@ class ShowAnimations: NSObject {
         aarr.append(a3D(tr: (1.0, 1.0, 1.0)))
         aarr.append(a3D(tr: (0.9, 0.9, 0.9)))
         aarr.append(a3D(tr: (1.0, 1.0, 1.0)))
-
+        
     }
     
     private func hidAni() {
@@ -70,7 +72,7 @@ class ShowAnimations: NSObject {
         aarr.append(a3D(tr: (0.4, 0.4, 0.4)))
         aarr.append(a3D(tr: (0.3, 0.3, 0.3)))
         aarr.append(a3D(tr: (0.2, 0.2, 0.2)))
-
+        
     }
     func a3D(tr: aa) -> CATransform3D {
         return CATransform3DMakeScale(tr.x, tr.y, tr.z)
@@ -82,7 +84,7 @@ extension ShowAnimations: CAAnimationDelegate{
         call?(flag, isShow)
         if isShow {
             v?.layer.transform = CATransform3DMakeScale(1, 1, 1)
-
+            
         }else{
             v?.layer.transform = CATransform3DMakeScale(0.2, 0.2, 0.2)
         }

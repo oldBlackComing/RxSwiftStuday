@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		39F6333A2176E7FB009C5E81 /* ShowViewAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F633392176E7FB009C5E81 /* ShowViewAnimation.swift */; };
+		39F6333D2176E9A4009C5E81 /* HZFFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F6333B2176E9A4009C5E81 /* HZFFont.swift */; };
+		39F6333E2176E9A4009C5E81 /* PrivacyAgreementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F6333C2176E9A4009C5E81 /* PrivacyAgreementViewController.swift */; };
+		39F633402176EDCB009C5E81 /* ShowAnimations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F6333F2176EDCB009C5E81 /* ShowAnimations.swift */; };
 		39FA0F2621742E5A004A9092 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39FA0F2521742E5A004A9092 /* AppDelegate.swift */; };
 		39FA0F2821742E5A004A9092 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39FA0F2721742E5A004A9092 /* ViewController.swift */; };
 		39FA0F2B21742E5A004A9092 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 39FA0F2921742E5A004A9092 /* Main.storyboard */; };
@@ -38,7 +42,6 @@
 		39FA3A942175D5040049C0A4 /* icon_unselect@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 39FA3A902175D5030049C0A4 /* icon_unselect@3x.png */; };
 		39FA3A952175D5040049C0A4 /* icon_unselect@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 39FA3A912175D5040049C0A4 /* icon_unselect@2x.png */; };
 		4222BC7221762DAE004D6E8A /* CustomerTranslation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4222BC7121762DAE004D6E8A /* CustomerTranslation.swift */; };
-		4222BC74217639AF004D6E8A /* ShowAnimations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4222BC73217639AF004D6E8A /* ShowAnimations.swift */; };
 		AD92F3BE8E465B9E2D84A242 /* Pods_ImagePickerDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E71083D9B7AA328F0FA817A1 /* Pods_ImagePickerDemo.framework */; };
 /* End PBXBuildFile section */
 
@@ -60,6 +63,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		39F633392176E7FB009C5E81 /* ShowViewAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ShowViewAnimation.swift; path = "../../../../../Customer-iOS-v2/Huizhaofang/会找房/Sources/ShowViewAnimation.swift"; sourceTree = "<group>"; };
+		39F6333B2176E9A4009C5E81 /* HZFFont.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HZFFont.swift; sourceTree = "<group>"; };
+		39F6333C2176E9A4009C5E81 /* PrivacyAgreementViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrivacyAgreementViewController.swift; sourceTree = "<group>"; };
+		39F6333F2176EDCB009C5E81 /* ShowAnimations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowAnimations.swift; sourceTree = "<group>"; };
 		39FA0F2221742E5A004A9092 /* ImagePickerDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ImagePickerDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		39FA0F2521742E5A004A9092 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		39FA0F2721742E5A004A9092 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -97,7 +104,6 @@
 		39FA3A902175D5030049C0A4 /* icon_unselect@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_unselect@3x.png"; sourceTree = "<group>"; };
 		39FA3A912175D5040049C0A4 /* icon_unselect@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_unselect@2x.png"; sourceTree = "<group>"; };
 		4222BC7121762DAE004D6E8A /* CustomerTranslation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerTranslation.swift; sourceTree = "<group>"; };
-		4222BC73217639AF004D6E8A /* ShowAnimations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowAnimations.swift; sourceTree = "<group>"; };
 		6CF9C257DA2FC726CB9D8EA5 /* Pods-ImagePickerDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ImagePickerDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-ImagePickerDemo/Pods-ImagePickerDemo.release.xcconfig"; sourceTree = "<group>"; };
 		858330ED077CF850C9B30F58 /* Pods-ImagePickerDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ImagePickerDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ImagePickerDemo/Pods-ImagePickerDemo.debug.xcconfig"; sourceTree = "<group>"; };
 		E71083D9B7AA328F0FA817A1 /* Pods_ImagePickerDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ImagePickerDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -154,6 +160,9 @@
 		39FA0F2421742E5A004A9092 /* ImagePickerDemo */ = {
 			isa = PBXGroup;
 			children = (
+				39F6333B2176E9A4009C5E81 /* HZFFont.swift */,
+				39F6333C2176E9A4009C5E81 /* PrivacyAgreementViewController.swift */,
+				39F6333F2176EDCB009C5E81 /* ShowAnimations.swift */,
 				39FA0F5321742E9B004A9092 /* Image */,
 				39FA0F2521742E5A004A9092 /* AppDelegate.swift */,
 				39FA0F2721742E5A004A9092 /* ViewController.swift */,
@@ -240,7 +249,7 @@
 		39FA3A87217580300049C0A4 /* Protocals */ = {
 			isa = PBXGroup;
 			children = (
-				4222BC73217639AF004D6E8A /* ShowAnimations.swift */,
+				39F633392176E7FB009C5E81 /* ShowViewAnimation.swift */,
 				4222BC7121762DAE004D6E8A /* CustomerTranslation.swift */,
 				39FA3A88217580800049C0A4 /* GetPremissionProtocal.swift */,
 			);
@@ -459,18 +468,21 @@
 				39FA0F6821747C38004A9092 /* PhotoCollectionViewCell.swift in Sources */,
 				39FA0F5B21744069004A9092 /* PhotoCollectionViewController.swift in Sources */,
 				39FA0F702174845F004A9092 /* PhotoPreviewCellVM.swift in Sources */,
-				4222BC74217639AF004D6E8A /* ShowAnimations.swift in Sources */,
 				4222BC7221762DAE004D6E8A /* CustomerTranslation.swift in Sources */,
 				39FA0F5D21744206004A9092 /* PhotoSelectorConfig.swift in Sources */,
 				39FA0F6921747C38004A9092 /* PhotoCollectionViewCellVM.swift in Sources */,
 				39FA0F6521747071004A9092 /* AlbumToolbarView.swift in Sources */,
 				39FA0F6F2174845F004A9092 /* PhotoPreviewCell.swift in Sources */,
+				39F6333A2176E7FB009C5E81 /* ShowViewAnimation.swift in Sources */,
+				39F633402176EDCB009C5E81 /* ShowAnimations.swift in Sources */,
 				39FA0F552174307C004A9092 /* PhotoSelectorViewController.swift in Sources */,
 				39FA0F2821742E5A004A9092 /* ViewController.swift in Sources */,
 				39FA0F622174475B004A9092 /* PhotoTableViewCellVM.swift in Sources */,
 				39FA0F5921743397004A9092 /* PhotoTableViewController.swift in Sources */,
 				39FA0F2621742E5A004A9092 /* AppDelegate.swift in Sources */,
 				39FA3A89217580800049C0A4 /* GetPremissionProtocal.swift in Sources */,
+				39F6333D2176E9A4009C5E81 /* HZFFont.swift in Sources */,
+				39F6333E2176E9A4009C5E81 /* PrivacyAgreementViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

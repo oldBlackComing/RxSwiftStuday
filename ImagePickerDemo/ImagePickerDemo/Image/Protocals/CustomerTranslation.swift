@@ -87,7 +87,7 @@ class CustomerTranslation:NSObject, UIViewControllerTransitioningDelegate {
 
 extension CustomerTranslation: UIViewControllerAnimatedTransitioning {
     func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
-        return 5
+        return 0.5
     }
     
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {

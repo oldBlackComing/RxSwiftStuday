@@ -14,6 +14,7 @@ class PhotoTableViewCell: UITableViewCell {
 
     let photoImageManager = PHCachingImageManager()
     
+    
     private lazy var coverImage = { () -> UIImageView in
         let view = UIImageView()
         view.backgroundColor = UIColor.clear
@@ -33,7 +34,7 @@ class PhotoTableViewCell: UITableViewCell {
         label.sizeToFit()
         label.backgroundColor = UIColor.clear
         label.font = UIFont.systemFont(ofSize: 12)
-        label.textColor = UIColor.lightText
+        label.textColor = UIColor.gray
         return label
     }()
     
@@ -61,7 +62,7 @@ class PhotoTableViewCell: UITableViewCell {
         }
         numLabel.snp.makeConstraints { (make) in
             make.left.equalTo(titleLabel.snp.right).offset(0)
-            make.centerY.equalTo(titleLabel)
+            make.bottom.equalTo(titleLabel.snp.bottom)
         }
     }
     

@@ -235,10 +235,12 @@ class PhotoCollectionViewController: UICollectionViewController, AlbumToolbarVie
             let vm = dataSource[indexPath.row]
             // 被覆盖，即没有被选中
             if vm.isCovered {
-                let alert = UIAlertController.init(title: nil, message: "你最多只能选\(nav!.maxSelectNum)张", preferredStyle: UIAlertController.Style.alert)
-                let sureAction = UIAlertAction.init(title: "我知道了", style: UIAlertAction.Style.destructive, handler: nil)
-                alert.addAction(sureAction)
-                self.present(alert, animated: true, completion: nil)
+//                let alert = UIAlertController.init(title: nil, message: "你最多只能选\(nav!.maxSelectNum)张", preferredStyle: UIAlertController.Style.alert)
+//                let sureAction = UIAlertAction.init(title: "我知道了", style: UIAlertAction.Style.destructive, handler: nil)
+//                alert.addAction(sureAction)
+//                self.present(alert, animated: true, completion: nil)
+                
+                ShowViewAnimation.share.show(inview: self.view)
             } else {
                 previewBtnTap(asset: vm.asset)
             }
@@ -459,10 +461,11 @@ extension PhotoCollectionViewController: AnimationProTocol {
         
         let vm = dataSource[ta]
         
-        var mut = 0
+        var mut:CGFloat = 0
+        let w = CGFloat(vm.asset?.pixelWidth ?? 0)
         
         if let h = vm.asset?.pixelHeight, h > 0 {
-            mut = (vm.asset?.pixelWidth ?? 0) / h
+            mut = CGFloat((w / CGFloat(h)))
         }
         let height: CGFloat = width / CGFloat(mut > 0 ? mut : 1)
         

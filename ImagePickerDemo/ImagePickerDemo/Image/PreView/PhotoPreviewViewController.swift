@@ -68,7 +68,11 @@ class PhotoPreviewViewController: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        if #available(iOS 11.0, *) {
+            collectionView.contentInsetAdjustmentBehavior = UIScrollView.ContentInsetAdjustmentBehavior.never;
+        } else {
+            self.automaticallyAdjustsScrollViewInsets = false;
+        }
         //获取导航并成为代理
         nav = self.navigationController as? PhotoSelectorViewController
         
@@ -162,7 +166,18 @@ extension PhotoPreviewViewController: UICollectionViewDelegate, UICollectionView
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotoPreviewCellID, for: indexPath) as! PhotoPreviewCell
         let vm = dataSource[indexPath.row]
         cell.binndVM(vm: vm)
+        cell.callBack = {[weak self] in
+            guard let `self` = self else {
+                return
+            }
+            
+            self.dismiss(animated: true, completion: nil)
+        }
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        self.dismiss(animated: true)
     }
     //scroView的协议方法
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -231,13 +246,14 @@ extension PhotoPreviewViewController: DismissProTocol {
             return CGRect.init(x: 0, y: 0, width: 0, height: 0)
         }
         
-        var mut = 0
+        var mut:CGFloat = 0
+        let w = CGFloat(vm.asset?.pixelWidth ?? 0)
         
         if let h = vm.asset?.pixelHeight, h > 0 {
-            mut = (vm.asset?.pixelWidth ?? 0) / h
+            mut = CGFloat((w / CGFloat(h)))
         }
         let height: CGFloat = width / CGFloat(mut > 0 ? mut : 1)
-        
+
         let y: CGFloat = UIScreen.main.bounds.height / 2 - height/2
         return CGRect.init(x: 0, y: y, width: width, height: height)
 

@@ -8,7 +8,11 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, PhotoSelectorViewControllerDelegate {
+    func imageSelectFinished(images: [UIImage]) {
+        print(images)
+    }
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,7 +23,9 @@ class ViewController: UIViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        self.present(PhotoSelectorViewController.init(maxNum: 9), animated: true, completion: nil)
+        let a = PhotoSelectorViewController.init(maxNum: 9)
+        a.imageSelectDelegate = self
+        self.present(a, animated: true, completion: nil)
 
     }
 }
